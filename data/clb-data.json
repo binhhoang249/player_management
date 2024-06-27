@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "club": "FC Barcelona",
+        "founded": 1899,
+        "stadium": "Camp Nou"
+    },
+    {
+        "id": 2,
+        "club": "Real Madrid",
+        "founded": 1899,
+        "stadium": "Santiago Bernabeu"
+    }
+]
