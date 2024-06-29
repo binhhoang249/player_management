@@ -1,3 +1,3 @@
-public class Coach {
+public class Coach extends Person {
     
 }
