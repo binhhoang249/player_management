@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Player extends Person {
     private int playerId;
-    private List<Integer> clubs; 
+    private List<Integer> clubsID; 
     private double transferValue;
     private int jerseyNumber;
     private double height;
@@ -12,7 +12,7 @@ public class Player extends Person {
     public Player(int playerId, String name, int age, String nationality, double transferValue, int jerseyNumber, double height, double weight) {
         super(name, age, nationality); 
         this.playerId = playerId;
-        this.clubs = new ArrayList<>();
+        this.clubsID = new ArrayList<>();
         this.transferValue = transferValue;
         this.jerseyNumber = jerseyNumber;
         this.height = height;
@@ -24,15 +24,15 @@ public class Player extends Person {
     }
 
     public void addClub(int clubId) {
-        clubs.add(clubId);
+        clubsID.add(clubId);
     }
 
     public void removeClub(int clubId) {
-        clubs.remove(Integer.valueOf(clubId));
+        clubsID.remove(Integer.valueOf(clubId));
     }
 
-    public List<Integer> getClubs() {
-        return clubs;
+    public List<Integer> getclubsID() {
+        return clubsID;
     }
 
     public double getTransferValue() {
@@ -74,7 +74,7 @@ public class Player extends Person {
                 ", jerseyNumber=" + jerseyNumber +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", clubs=" + clubs +
+                ", clubsID=" + clubsID +
                 '}';
     }
  }

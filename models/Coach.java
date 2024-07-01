@@ -1,26 +1,46 @@
 public class Coach extends Person {
-    private static int coachID ;
+    private int coachID;
     private int experience;
     private int clubID;
 
-    public Coach(){}
+    public Coach() {
+        super(); 
+    }
 
-    public Coach (int coachID,String name,int age, String nationality,int experience, int clubID){
+    public Coach(int coachID, String name, int age, String nationality, int experience, int clubID) {
         super(name, age, nationality); 
-        Coach.coachID = coachID;
+        this.coachID = coachID;
         this.experience = experience;
+        this.clubID = clubID;   
+    }
+
+    public int getCoachID() {
+        return coachID;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getClubID() {
+        return clubID;
+    }
+
+    public void setClubID(int clubID) {
         this.clubID = clubID;
     }
 
-    public int getCoachID(){
-        return Coach.coachID;
-    }
-
-    public int getExperience(){
-        return this.experience;
-    }
-
-    public void setExperience(int experience){
-        this.experience = experience;
+    @Override
+    public String toString() {
+        return "Coach{" +
+                "coachID=" + coachID +
+                ", " + super.toString() +
+                ", experience=" + experience +
+                ", clubID=" + clubID +
+                '}';
     }
 }

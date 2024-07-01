@@ -11,18 +11,18 @@ public class Club {
         Club.ClubId = ClubId;
         this.clubName = clubName;
         Club.yearFounded = yearFounded;
-        this.stadium = stadium;
+        this.stadium = stadium; 
     }
 
-    public int getID(){
+    public int getClubID(){
         return Club.ClubId;
     }
 
-    public String getName(){
+    public String getCLubName(){
         return this.clubName;
     }
 
-    public void setName (String clubName){
+    public void setClubName (String clubName){
         this.clubName = clubName;
     }
 
