@@ -4,14 +4,14 @@ public class Coach extends Person {
     private int clubID;
 
     public Coach() {
-        super(); 
+        super();
     }
 
-    public Coach(int coachID, String name, int age, String nationality, int experience, int clubID) {
-        super(name, age, nationality); 
+    public Coach(int coachID, String name, int experience, int clubID, String nationality) {
+        super(name, nationality);
         this.coachID = coachID;
         this.experience = experience;
-        this.clubID = clubID;   
+        this.clubID = clubID;
     }
 
     public int getCoachID() {
@@ -36,11 +36,9 @@ public class Coach extends Person {
 
     @Override
     public String toString() {
-        return "Coach{" +
-                "coachID=" + coachID +
+        return coachID +
                 ", " + super.toString() +
-                ", experience=" + experience +
-                ", clubID=" + clubID +
-                '}';
+                ", " + experience +
+                ", " + clubID;
     }
 }

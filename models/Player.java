@@ -1,18 +1,17 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Person {
     private int playerId;
-    private List<Integer> clubsID; 
+    private List<Integer> clubsID;
     private double transferValue;
     private int jerseyNumber;
     private double height;
     private double weight;
 
-    public Player(int playerId, String name, int age, String nationality, double transferValue, int jerseyNumber, double height, double weight) {
-        super(name, age, nationality); 
+    public Player(int playerId, String name, int age, String nationality, double transferValue, int jerseyNumber, double height, double weight, List<Integer> clubsID) {
+        super(name, age, nationality);
         this.playerId = playerId;
-        this.clubsID = new ArrayList<>();
+        this.clubsID = clubsID;
         this.transferValue = transferValue;
         this.jerseyNumber = jerseyNumber;
         this.height = height;
@@ -31,7 +30,7 @@ public class Player extends Person {
         clubsID.remove(Integer.valueOf(clubId));
     }
 
-    public List<Integer> getclubsID() {
+    public List<Integer> getClubsID() {
         return clubsID;
     }
 
@@ -69,12 +68,12 @@ public class Player extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + ", playerId=" + playerId +
-                ", transferValue=" + transferValue +
-                ", jerseyNumber=" + jerseyNumber +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", clubsID=" + clubsID +
-                '}';
+        return playerId +
+                ", " + super.toString() +
+                ", " + transferValue +
+                ", " + jerseyNumber +
+                ", " + height +
+                ", " + weight +
+                ", " + clubsID;
     }
- }
+}
