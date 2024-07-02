@@ -5,6 +5,38 @@ public class Club {
     private int yearFounded;
     private String stadium;
 
+    public int getClubId() {
+        return ClubId;
+    }
+
+    public void setClubId(int clubId) {
+        ClubId = clubId;
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public int getYearFounded() {
+        return yearFounded;
+    }
+
+    public void setYearFounded(int yearFounded) {
+        this.yearFounded = yearFounded;
+    }
+
+    public String getStadium() {
+        return stadium;
+    }
+
+    public void setStadium(String stadium) {
+        this.stadium = stadium;
+    }
+
     public Club() {
     }
 
@@ -15,36 +47,13 @@ public class Club {
         this.stadium = stadium;
     }
 
-    public int getClubID() {
-        return this.ClubId;
-    }
-
-    public String getCLubName() {
-        return this.clubName;
-    }
-
-    public void setClubName(String clubName) {
-        this.clubName = clubName;
-    }
-
-    public int getFounded() {
-        return this.yearFounded;
-    }
-
-    public String getStadium() {
-        return this.stadium;
-    }
-
-    public void setStadium(String stadium) {
-        this.stadium = stadium;
-    }
 
     @Override
     public String toString() {
         return ClubId +
                 ", " + clubName +
                 ", " + yearFounded +
-                ", " + stadium;
+                ", " + stadium +"\n";
 
     }
 }

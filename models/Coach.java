@@ -3,19 +3,12 @@ public class Coach extends Person {
     private int experience;
     private int clubID;
 
-    public Coach() {
-        super();
-    }
-
-    public Coach(int coachID, String name, int experience, int clubID, String nationality) {
-        super(name, nationality);
-        this.coachID = coachID;
-        this.experience = experience;
-        this.clubID = clubID;
-    }
-
     public int getCoachID() {
         return coachID;
+    }
+
+    public void setCoachID(int coachID) {
+        this.coachID = coachID;
     }
 
     public int getExperience() {
@@ -33,6 +26,19 @@ public class Coach extends Person {
     public void setClubID(int clubID) {
         this.clubID = clubID;
     }
+
+    public Coach() {
+        super();
+    }
+
+    public Coach(int coachID, String name, int experience, int clubID, String nationality) {
+        super(name, nationality);
+        this.coachID = coachID;
+        this.experience = experience;
+        this.clubID = clubID;
+    }
+
+
 
     @Override
     public String toString() {
