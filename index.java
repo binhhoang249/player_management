@@ -256,6 +256,9 @@ public static void deleteClubWithInput(Scanner input) {
                             System.out.println("1. Delete by ID");
                             System.out.println("2. Delete by Club Name");
                             System.out.print("Enter your option: ");
+                            for (int i = 0; i<clubs.size();i++){
+                                System.out.println(clubs.get(i).toString());
+                            }
                             int option = 0;
                             try {
                                 option = input.nextInt();
@@ -599,6 +602,10 @@ public static void deleteClubWithInput(Scanner input) {
                                     }
 
     public static void deletePlayer(Scanner input) {
+                                    for (int i = 0; i<players.size();i++)
+                                    {
+                                        System.out.println(players.get(i).toString());
+                                    }
                                     System.out.print("Enter player ID to delete: ");
                                     int playerId = input.nextInt();
                                     input.nextLine();
@@ -756,6 +763,9 @@ public static void deleteClubWithInput(Scanner input) {
                                     }
 
     public static void deleteCoach(Scanner input) {
+                                for (int i = 0;i<coaches.size();i++){
+                                    System.out.println(coaches.get(i).toString());
+                                }
                                 System.out.print("Enter coach ID to delete: ");
                                 try {
                                     int coachId = input.nextInt();
