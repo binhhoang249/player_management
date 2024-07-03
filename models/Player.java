@@ -22,16 +22,12 @@ public class Player extends Person {
         return playerId;
     }
 
-    public void addClub(int clubId) {
-        clubsID.add(clubId);
-    }
-
-    public void removeClub(int clubId) {
-        clubsID.remove(Integer.valueOf(clubId));
-    }
-
     public List<Integer> getClubsID() {
         return clubsID;
+    }
+
+    public void setClubsID(List<Integer> clubsID) {
+        this.clubsID = clubsID;
     }
 
     public double getTransferValue() {
@@ -76,4 +72,5 @@ public class Player extends Person {
                 ", " + weight +
                 ", " + clubsID;
     }
+
 }

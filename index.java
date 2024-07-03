@@ -1,5 +1,7 @@
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +55,8 @@ public class index {
             System.out.println("2. searchClub ");
             System.out.println("3. Update club");
             System.out.println("4. Delete club");
-            System.out.println("5. Back to Main Menu");
+            System.out.println("5. Calculate the total transfer value of the club");
+            System.out.println("6. Back to Main Menu");
             System.out.print("Please enter your choice: ");
             choice = input.nextInt();
 
@@ -71,13 +74,20 @@ public class index {
                     deleteClubWithInput(input);
                     break;
                 case 5:
+                System.out.print("Enter club name to calculate total transfer value: ");
+                input.nextLine(); 
+                String clubName = input.nextLine().trim();
+                double totalTransferValue = calculateTotalTransferValue(players, clubName);
+                System.out.println("Total transfer value for club " + clubName + ": " + totalTransferValue);
+                break;
+                case 6:
                     System.out.println("Returning to Main Menu...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
 
     // Đây là thêm câu lạc bộ vào arrayList có sẵn.
@@ -315,11 +325,496 @@ public static void deleteClubWithInput(Scanner input) {
                                     }
 
 
+   
     public static void playerInformation() {
-    }
+                                Scanner input = new Scanner(System.in);
+                                int choice;
+                                do {
+                                    System.out.println("----- Player Management -----");
+                                    System.out.println("1. Add Player");
+                                    System.out.println("2. Search Player");
+                                    System.out.println("3. Update Player");
+                                    System.out.println("4. Delete Player");
+                                    System.out.println("5. Back to Main Menu");
+                                    System.out.print("Please enter your choice: ");
 
+                                    try {
+                                        choice = input.nextInt();
+                                        switch (choice) {
+                                            case 1:
+                                                addPlayer(input);
+                                                break;
+                                            case 2:
+                                                searchPlayerMenu(input);
+                                                break;
+                                            case 3:
+                                                updatePlayer(input);
+                                                break;
+                                            case 4:
+                                                deletePlayer(input);
+                                                break;
+                                            case 5:
+                                                System.out.println("Returning to main menu...");
+                                                break;
+                                            default:
+                                                System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                                                break;
+                                        }
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Invalid input. Please enter a valid number.");
+                                        input.nextLine();
+                                        choice = 0;
+                                    }
+                                } while (choice != 5);
+                            }
+
+    public static void addPlayer(Scanner input) {
+                                    input.nextLine();
+
+                                    System.out.println("Enter player details:");         
+                                    int playerId = players.getLast().getJerseyNumber();
+                                    System.out.print("Name: ");
+                                    String name = input.nextLine();
+
+                                    System.out.print("Age: ");
+                                    int age = input.nextInt();
+                                    input.nextLine();
+
+                                    System.out.print("Nationality: ");
+                                    String nationality = input.nextLine();
+
+                                    System.out.print("Transfer Value: ");
+                                    double transferValue = input.nextDouble();
+
+                                    System.out.print("Jersey Number: ");
+                                    int jerseyNumber = input.nextInt();
+
+                                    System.out.print("Height: ");
+                                    double height = input.nextDouble();
+
+                                    System.out.print("Weight: ");
+                                    double weight = input.nextDouble();
+
+                                    System.out.print("Number of Clubs: ");
+                                    int numClubs = input.nextInt();
+                                    input.nextLine();
+
+                                    List<Integer> clubIds = new ArrayList<>();
+                                    for (int i = 0; i < numClubs; i++) {
+                                        System.out.print("Club ID " + (i + 1) + ": ");
+                                        int clubId = input.nextInt();
+                                        clubIds.add(clubId);
+                                    }
+
+                                    Player newPlayer = new Player(playerId, name, age, nationality, transferValue, jerseyNumber, height, weight, clubIds);
+                                    players.add(newPlayer);
+                                    Path playerPath = Path.of("./data/players.txt");
+                                        // lấy path tới file player.txt
+                                        fileExe.writeToFile(playerPath, fileExe.playersToStringList(players));
+                                    
+
+                                        System.out.println("Player added successfully.");
+                                    }
+
+    public static void updatePlayer(Scanner input) {
+                                    input.nextLine();
+
+                                    System.out.print("Enter player ID to update: ");
+                                    int playerId = input.nextInt();
+                                    input.nextLine();
+
+                                    boolean found = false;
+                                    for (Player player : players) {
+                                        if (player.getPlayerId() == playerId) {
+                                            System.out.println("Enter new details:");
+
+                                            System.out.print("Name: ");
+                                            String name = input.nextLine();
+                                            player.setName(name);
+
+                                            System.out.print("Age: ");
+                                            int age = input.nextInt();
+                                            input.nextLine();
+                                            player.setAge(age);
+
+                                            System.out.print("Nationality: ");
+                                            String nationality = input.nextLine();
+                                            player.setNationality(nationality);
+
+                                            System.out.print("Transfer Value: ");
+                                            double transferValue = input.nextDouble();
+                                            player.setTransferValue(transferValue);
+
+                                            System.out.print("Jersey Number: ");
+                                            int jerseyNumber = input.nextInt();
+                                            player.setJerseyNumber(jerseyNumber);
+
+                                            System.out.print("Height: ");
+                                            double height = input.nextDouble();
+                                            player.setHeight(height);
+
+                                            System.out.print("Weight: ");
+                                            double weight = input.nextDouble();
+                                            player.setWeight(weight);
+
+                                            System.out.print("Number of Clubs: ");
+                                            int numClubs = input.nextInt();
+                                            input.nextLine();
+
+                                            List<Integer> clubIds = new ArrayList<>();
+                                            for (int i = 0; i < numClubs; i++) {
+                                                System.out.print("Club ID " + (i + 1) + ": ");
+                                                int clubId = input.nextInt();
+                                                clubIds.add(clubId);
+                                            }
+                                            player.setClubsID(clubIds);
+                                            Path playerPath = Path.of("./data/players.txt");
+                                                                    // lấy path tới file player.txt
+                                                                    fileExe.writeToFile(playerPath, fileExe.playersToStringList(players));
+
+                                            System.out.println("Player updated successfully.");
+                                            found = true;
+                                            break;
+                                            }
+                                            }
+
+                                            if (!found) {
+                                                System.out.println("Player with ID " + playerId + " not found.");
+                                            }
+                                            }
+
+    public static void searchPlayerMenu(Scanner input) {
+                                            int choice;
+                                            do {
+                                                System.out.println("Search Player by:");
+                                                System.out.println("1. Player ID");
+                                                System.out.println("2. Player Name");
+                                                System.out.println("3. Club ID");
+                                                System.out.println("4. Club Name");
+                                                System.out.println("5. Back to Player Menu");
+                                                System.out.print("Enter your choice: ");
+
+                                                try {
+                                                    choice = input.nextInt();
+                                                    input.nextLine();
+
+                                                    switch (choice) {
+                                                        case 1:
+                                                            System.out.print("Enter player ID: ");
+                                                            int playerId = input.nextInt();
+                                                            input.nextLine();
+                                                            searchPlayerById(playerId);
+                                                            break;
+                                                        case 2:
+                                                            System.out.print("Enter player name: ");
+                                                            String playerName = input.nextLine();
+                                                            searchPlayerByName(playerName);
+                                                            break;
+                                                        case 3:
+                                                            System.out.print("Enter club ID: ");
+                                                            int clubId = input.nextInt();
+                                                            input.nextLine();
+                                                            searchPlayersByClubId(clubId);
+                                                            break;
+                                                        case 4:
+                                                            System.out.print("Enter club name: ");
+                                                            String clubName = input.nextLine();
+                                                            searchPlayersByClubName(clubName);
+                                                            break;
+                                                        case 5:
+                                                            System.out.println("Returning to Player Menu...");
+                                                            break;
+                                                        default:
+                                                            System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                                                            break;
+                                                    }
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Invalid input. Please enter a valid number.");
+                                                    input.nextLine();
+                                                    choice = 0;
+                                                }
+                                            } while (choice != 5);
+                                        }
+
+    public static void searchPlayerById(int playerId) {
+                                        boolean found = false;
+                                        for (Player player : players) {
+                                            if (player.getPlayerId() == playerId) {
+                                                System.out.println("Player found:");
+                                                System.out.println(player);
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!found) {
+                                            System.out.println("Player with ID " + playerId + " not found.");
+                                        }
+                                    }
+
+                                    public static void searchPlayerByName(String playerName) {
+                                        boolean found = false;
+                                        for (Player player : players) {
+                                            if (player.getName().equalsIgnoreCase(playerName)) {
+                                                System.out.println("Player found:");
+                                                System.out.println(player);
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!found) {
+                                            System.out.println("Player with name \"" + playerName + "\" not found.");
+                                        }
+                                    }
+
+    public static void searchPlayersByClubId(int clubId) {
+                                    boolean found = false;
+                                    for (Player player : players) {
+                                        if (player.getClubsID().contains(clubId)) {
+                                            System.out.println("Players in Club ID " + clubId + ":");
+                                            System.out.println(player);
+                                            found = true;
+                                        }
+                                    }
+                                    if (!found) {
+                                        System.out.println("No players found for Club ID " + clubId);
+                                    }
+                                    }
+
+    public static void searchPlayersByClubName(String clubName) {
+                                    boolean found = false;
+                                    for (Player player : players) {
+                                        for (int clubId : player.getClubsID()) {
+                                            Club club = getClubById(clubId);
+                                            if (club != null && club.getClubName().equalsIgnoreCase(clubName)) {
+                                                System.out.println("Players in Club \"" + clubName + "\":");
+                                                System.out.println(player);
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (!found) {
+                                        System.out.println("No players found for Club \"" + clubName + "\"");
+                                    }
+                                    }
+
+    public static void deletePlayer(Scanner input) {
+                                    System.out.print("Enter player ID to delete: ");
+                                    int playerId = input.nextInt();
+                                    input.nextLine();
+
+                                    boolean found = false;
+                                    Iterator<Player> iterator = players.iterator();
+                                    while (iterator.hasNext()) {
+                                        Player player = iterator.next();
+                                        if (player.getPlayerId() == playerId) {
+                                            iterator.remove();          
+                                            System.out.println("Player with ID " + playerId + " deleted successfully.");
+                                            found = true;
+                                            Path playerPath = Path.of("./data/player.txt");
+                                            // lấy path tới file player.txt
+                                            fileExe.writeToFile(playerPath, fileExe.playersToStringList(players));
+                                            break;
+                                        }
+                                    }
+                                    if (!found) {
+                                        System.out.println("Player with ID " + playerId + " not found.");
+                                    }
+                                }
+
+    private static Club getClubById(int clubId) {
+                                    for (Club club : clubs) {
+                                        if (club.getClubId() == clubId) {
+                                            return club;
+                                        }
+                                    }
+                                    return null;
+                                }
     public static void coachInformation() {
-    }
+                                Scanner input = new Scanner(System.in);
+                                int choice;
+                                do {
+                                    System.out.println("----- Coach Management -----");
+                                    System.out.println("1. Add Coach");
+                                    System.out.println("2. Update Coach");
+                                    System.out.println("3. Delete Coach");
+                                    System.out.println("4. Print All Coaches");
+                                    System.out.println("5. Exit");
+                                    System.out.print("Please enter your choice: ");
+
+                                    try {
+                                        choice = input.nextInt();
+                                        input.nextLine(); 
+
+                                        switch (choice) {
+                                            case 1:
+                                                addCoach(input);
+                                                break;
+                                            case 2:
+                                                updateCoach(input);
+                                                break;
+                                            case 3:
+                                                deleteCoach(input);
+                                                break;
+                                            case 4:
+                                                printAllCoaches();
+                                                break;
+                                            case 5:
+                                                System.out.println("Exiting...");
+                                                break;
+                                            default:
+                                                System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                                                break;
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Error: " + e.getMessage());
+                                        input.nextLine();
+                                        choice = 0; 
+                                    }
+                                } while (choice != 5);
+                                input.close();
+                                }
+
+    public static void addCoach(Scanner input) {
+                                System.out.println("Enter coach details:");
+
+                                try {
+                                    System.out.print("Coach ID: ");
+                                    int coachID = input.nextInt();
+                                    input.nextLine();
+
+                                    System.out.print("Name: ");
+                                    String name = input.nextLine();
+
+                                    System.out.print("Experience (years): ");
+                                    int experience = input.nextInt();
+                                    input.nextLine(); 
+
+                                    System.out.print("Club ID: ");
+                                    int clubID = input.nextInt();
+                                    input.nextLine(); 
+
+                                    System.out.print("Nationality: ");
+                                    String nationality = input.nextLine();
+
+                                    Coach newCoach = new Coach(coachID, name, experience, clubID, nationality);
+                                    coaches.add(newCoach);
+
+                                    System.out.println("Coach added successfully.");
+                                    Path coachPath = Path.of("./data/coaches.txt");
+                                                                fileExe.writeToFile(coachPath, fileExe.coachesToStringList(coaches));
+                                } catch (Exception e) {
+                                    System.out.println("Error adding coach: " + e.getMessage());
+                                    input.nextLine(); 
+                                }
+                                }
+
+    public static void updateCoach(Scanner input) {
+                                System.out.print("Enter coach ID to update: ");
+                                try {
+                                    int coachId = input.nextInt();
+                                    input.nextLine(); 
+
+                                    boolean found = false;
+                                    for (Coach coach : coaches) {
+                                        if (coach.getCoachID() == coachId) {
+                                            System.out.println("Enter new details for Coach ID " + coachId + ":");
+
+                                            System.out.print("Name: ");
+                                            String name = input.nextLine();
+                                            coach.setName(name);
+
+                                            System.out.print("Experience (years): ");
+                                            int experience = input.nextInt();
+                                            input.nextLine(); 
+                                            coach.setExperience(experience);
+
+                                            System.out.print("Club ID: ");
+                                            int clubID = input.nextInt();
+                                            input.nextLine(); 
+                                            coach.setClubID(clubID);
+
+                                            System.out.print("Nationality: ");
+                                            String nationality = input.nextLine();
+                                            coach.setNationality(nationality);
+
+                                            System.out.println("Coach updated successfully.");
+                                            Path coachPath = Path.of("./data/coaches.txt");
+                                            fileExe.writeToFile(coachPath, fileExe.coachesToStringList(coaches));
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!found) {
+                                        System.out.println("Coach with ID " + coachId + " not found.");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Error updating coach: " + e.getMessage());
+                                    input.nextLine();
+                                    }
+                                    }
+
+    public static void deleteCoach(Scanner input) {
+                                System.out.print("Enter coach ID to delete: ");
+                                try {
+                                    int coachId = input.nextInt();
+                                    input.nextLine(); 
+
+                                    boolean found = false;
+                                    Iterator<Coach> iterator = coaches.iterator();
+                                    while (iterator.hasNext()) {
+                                        Coach coach = iterator.next();
+                                        if (coach.getCoachID() == coachId) {
+                                            iterator.remove();
+                                            System.out.println("Coach with ID " + coachId + " deleted successfully.");
+                                            Path coachPath = Path.of("./data/coaches.txt");
+                                            fileExe.writeToFile(coachPath, fileExe.coachesToStringList(coaches));
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!found) {
+                                        System.out.println("Coach with ID " + coachId + " not found.");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Error deleting coach: " + e.getMessage());
+                                    input.nextLine(); 
+                                }
+                                }
+
+    public static void printAllCoaches() {
+                                System.out.println("List of Coaches:");
+                                for (Coach coach : coaches) {
+                                    System.out.println(coach);
+                                }
+                                }
+    public static double calculateTotalTransferValue(List<Player> players, String clubName) {
+                                    double totalTransferValue = 0;
+                                    String normalizedClubName = clubName.toLowerCase();
+                                
+                                    for (Player player : players) {
+                                        for (int clubId : player.getClubsID()) {
+                                            Club club = getClubById(clubId);
+                                            if (club != null && club.getClubName().equalsIgnoreCase(normalizedClubName)) {
+                                                totalTransferValue += player.getTransferValue();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                
+                                    return totalTransferValue;
+                                }
+                                 
+    public static Club getClubByID(int clubId){
+                                    for (Club club : clubs) {
+                                        if (club.getClubId() == clubId) {
+                                            return club;
+                                        }
+                                    }
+                                    return null;
+                                }
 
     public static void readData() {
         Path clubPath = Path.of("./data/clubs.txt");
@@ -328,12 +823,5 @@ public static void deleteClubWithInput(Scanner input) {
         clubs = fileExe.readClubs(clubPath);
         coaches = fileExe.readCoaches(coachPath);
         players = fileExe.readPlayers(playerPath);
-
-        /*
-         * for (int i = 0; i < players.size(); i++) {
-         * System.out.println(players.get(i));
-         * }
-         */
     }
-
 }

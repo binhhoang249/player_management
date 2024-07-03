@@ -36,8 +36,6 @@ public class FileExe {
 
             public List<Coach> readCoaches(Path dataPath) {
                 this.path = dataPath;
-
-        // Reading from the file
             Object[] fileContents = readFile();
 
             List<Coach> coaches = new ArrayList<>();
@@ -63,15 +61,10 @@ public class FileExe {
             public List<Player> readPlayers(Path dataPath) {
                 this.path = dataPath;
 
-            // Reading from the file
             Object[] fileContents = readFile();
             List<Player> players = new ArrayList<>();
             for (Object line : fileContents) {
                 try {
-
-                // PARSE... DÙNG ĐỂ ÉP KIỂU
-                // SPLIT SẼ CHIA CHUỖI THEO REGEX VÀ TRẢ VỀ STRING[]
-                // TRIM XỬ LÝ KHOẢNG TRỐNG THỪA
                 String[] parts = ((String) line).split(", ");
                 int playerId = Integer.parseInt(parts[0].trim());
                 String name = parts[1].trim();
@@ -82,14 +75,9 @@ public class FileExe {
                 double height = Double.parseDouble(parts[6].trim());
                 double weight = Double.parseDouble(parts[7].trim());
 
-                // Parse clubsID array from the 8th part, assuming it's a string like "[1, 2]"
                 String clubsIDString = parts[8];
-                // SUBSTRING LẤY RA CHUỖI THEO MONG MUỐN CỦA MÌNH
-                // VD: MÌNH CÓ STRING [1 2 3 4 5] ĐỂ TRẢ RA 1 2 3 4 5 MÌNH DÙNG SUBSTRING(INDEX
-                // BẮT ĐẦU: 0, VÀ INDEX KẾT THÚC)
-                clubsIDString = clubsIDString.substring(1, clubsIDString.length() - 1); // Remove the square brackets
+                clubsIDString = clubsIDString.substring(1, clubsIDString.length() - 1); 
                 String[] clubIdStrings = clubsIDString.split(" ");
-                // SPLIT ĐỂ TRỞ THÀNH 1 CHUỖI TỪ 1 2 3 4 5 THÀNH [1,2,3,4,5]
                 List<Integer> clubsID = new ArrayList<>();
                 for (String clubIdString : clubIdStrings) {
                     int clubId = Integer.parseInt(clubIdString.trim());
@@ -109,7 +97,7 @@ public class FileExe {
                 public List<Club> readClubs(Path dataPath) {
                     this.path = dataPath;
 
-                    // Reading from the file
+                   
                     Object[] fileContents = readFile();
 
                     List<Club> clubs = new ArrayList<>();
