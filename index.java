@@ -84,7 +84,7 @@ public class index {
                     System.out.println("Returning to Main Menu...");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
                     break;
             }
         } while (choice != 6);
