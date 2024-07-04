@@ -618,7 +618,7 @@ public static void deleteClubWithInput(Scanner input) {
                                             iterator.remove();          
                                             System.out.println("Player with ID " + playerId + " deleted successfully.");
                                             found = true;
-                                            Path playerPath = Path.of("./data/player.txt");
+                                            Path playerPath = Path.of("./data/players.txt");
                                             // lấy path tới file player.txt
                                             fileExe.writeToFile(playerPath, fileExe.playersToStringList(players));
                                             break;
